@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
+import Navbar from "@/components/Navbar";
 import { OrderProvider } from "@/context/OrderContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 
 export const metadata: Metadata = {
   title: "Lumina",
@@ -16,10 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <CartProvider>
-  <OrderProvider>{children}</OrderProvider>
-</CartProvider>
-      </body>
+  <CartProvider>
+    <OrderProvider>
+      <WishlistProvider>
+        <Navbar />
+        {children}
+      </WishlistProvider>
+    </OrderProvider>
+  </CartProvider>
+</body>
     </html>
   );
 }
